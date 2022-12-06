@@ -1,8 +1,3 @@
-/*
-Author: Andrew Townley
-Date: 11/29/2022
-Description: Format CSV Files to Categorize Alike Zip-Codes
-*/
 'use strict';
 
 //Import Dependencies
@@ -72,7 +67,7 @@ const csv = require('csvtojson');
   const worksheet3 = workbook.addWorksheet('Mixed');
 
   // Generate excel worksheet Function
-  const genExclSht = function (worksheet, columnTitles, arr) {
+  const genExclShet = function (worksheet, columnTitles, arr) {
     //Makes Column Headings
     for (let i = 0; i < columnTitles.length; i++) {
       worksheet.getCell(String.fromCharCode(i + 65) + 1).value =
@@ -89,9 +84,9 @@ const csv = require('csvtojson');
   };
 
   //Make the Worksheets for Each Group
-  genExclSht(worksheet1, group1Keys, group1);
-  genExclSht(worksheet2, group2Keys, group2);
-  genExclSht(worksheet3, group3Keys, group3);
+  genExclShet(worksheet1, group1Keys, group1);
+  genExclShet(worksheet2, group2Keys, group2);
+  genExclShet(worksheet3, group3Keys, group3);
 
   // save under export.xlsx
   await workbook.xlsx.writeFile('FormatForMailing.xlsx');
