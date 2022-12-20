@@ -93,22 +93,12 @@ const generateExcelSheet = function (worksheet, donors) {
     worksheet.getCell(String.fromCharCode(i + 65) + 1).value = currHeader;
   });
 
-  // for (let i = 0; i < columnHeaders.length; i++) {
-  //   worksheet.getCell(String.fromCharCode(i + 65) + 1).value = columnHeaders[i];
-  // }
-
   donors.forEach((donor, i) => {
     columnHeaders.forEach((data, j) => {
-      worksheet.getCell(String.fromCharCode(j + 65) + (2 + i)).value =
-        donor[data];
+      let cellAlpha = String.fromCharCode(j + 65);
+      let cellNumber = 2 + i;
+
+      worksheet.getCell(cellAlpha + cellNumber).value = donor[data];
     });
   });
-
-  // //Enters Data
-  // for (let i = 0; i < donors.length; i++) {
-  //   for (let j = 0; j < columnHeaders.length; j++) {
-  //     worksheet.getCell(String.fromCharCode(j + 65) + (2 + i)).value =
-  //       donors[i][`${columnHeaders[j]}`];
-  //   }
-  // }
 };
