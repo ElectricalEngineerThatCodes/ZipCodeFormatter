@@ -7,23 +7,23 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-const arr = [1, 2, 3, 4, 5];
+document.querySelector('.check').addEventListener('click', function () {
+  app.get('/donors', async (req, res) => {
+    const fileName = 'FormatForMailing2.xlsx';
 
-app.get('/donors', async (req, res) => {
-  const fileName = 'FormatForMailing2.xlsx';
+    res.setHeader(
+      'Content-Type',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    );
 
-  res.setHeader(
-    'Content-Type',
-    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-  );
+    res.setHeader('Content-Disposition', 'attachment; filename=' + fileName);
 
-  res.setHeader('Content-Disposition', 'attachment; filename=' + fileName);
+    const workbook = await getWorkbook();
 
-  const workbook = await getWorkbook();
-
-  await workbook.xlsx.write(res);
-  res.status(200).end();
-  //   res.end();
+    await workbook.xlsx.write(res);
+    res.status(200).end();
+    //   res.end();
+  });
 });
 
 app.get('/users/atown', (req, res) => {

@@ -4,7 +4,7 @@
 const Excel = require('exceljs');
 const csv = require('csvtojson');
 
-(async function () {
+async function getWorkbook() {
   const donors = await csv().fromFile('UnformattedZipcodes.csv');
 
   const formattedDonors = getFormattedDonors(donors);
@@ -30,8 +30,10 @@ const csv = require('csvtojson');
   generateExcelSheet(nonMichiganDonorsWorksheet, nonMichiganDonors);
 
   // save under export.xlsx
-  await workbook.xlsx.writeFile('FormatForMailing.xlsx');
-})();
+  // await workbook.xlsx.writeFile('FormatForMailingTest.xlsx');
+
+  return workbook;
+}
 
 const populateZipcodes = (donors) => {
   const nonMetroDetroitMichiganDonors = [];
@@ -102,3 +104,5 @@ const generateExcelSheet = function (worksheet, donors) {
     });
   });
 };
+
+module.exports = { getWorkbook };
